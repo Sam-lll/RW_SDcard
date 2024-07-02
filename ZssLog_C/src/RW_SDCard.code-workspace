@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stm32f10x.h": "c",
+			"stm32f10x_conf.h": "c",
+			"fatfs.h": "c",
+			"main.h": "c",
+			"stm32f1xx_hal.h": "c",
+			"stm32f1xx_hal_conf.h": "c",
+			"ff.h": "c",
+			"ff_gen_drv.h": "c",
+			"integer.h": "c",
+			"stdafx.h": "c",
+			"util.h": "c",
+			"zss.zsslog_c.h": "c",
+			"stm32f1xx_hal_def.h": "c",
+			"usart.h": "c",
+			"stm32f1xx_hal_usart.h": "c",
+			"diskio.h": "c",
+			"string.h": "c",
+			"ffconf.h": "c",
+			"stdio.h": "c",
+			"disk_opt.h": "c",
+			"stm32f1xx_hal_tim.h": "c",
+			"usr_uart.h": "c",
+			"usr_timer.h": "c"
+		}
+	}
+}

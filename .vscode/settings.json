@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "stm32f10x.h": "c",
+        "stm32f10x_conf.h": "c",
+        "fatfs.h": "c",
+        "main.h": "c",
+        "stm32f1xx_hal.h": "c",
+        "stm32f1xx_hal_conf.h": "c",
+        "ff.h": "c"
+    }
+}
