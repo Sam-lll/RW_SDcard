@@ -14,6 +14,7 @@ int GetStartFlag(void);
 
 
 void ListFilesAndDirectories(const char* startDir);
+void SendLogContent(const char* logPath);
 void DiskReset(FIL fil, FATFS fs, const char* logPath);
 void WriteFile2Disk(const unsigned char* const strpath, const unsigned char* const strfile);
 void GetFiles(const char* path);

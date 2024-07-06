@@ -31,7 +31,7 @@ void MX_TIM2_Init(TIM_HandleTypeDef* htim)
 
   /* USER CODE END TIM2_Init 1 */
   htim->Instance = TIM2;
-  htim->Init.Prescaler = 72-1;
+  htim->Init.Prescaler = 8-1;
   htim->Init.CounterMode = TIM_COUNTERMODE_UP;
   htim->Init.Period = 20000-1;
   htim->Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

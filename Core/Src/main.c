@@ -24,6 +24,8 @@
 /* USER CODE BEGIN Includes */
 #include "stdafx.h"
 #include "usr_uart.h"
+#include "usr_pwm.h"
+#include "disk_opt.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,7 +58,6 @@ extern uint8_t* strCurfile;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern uint8_t RxBuffer[RxBuffer_Size];
-extern uint8_t TxBuffer[TxBuffer_Size];
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -96,12 +97,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  RTC_TimeTypeDef sTime = {0};
-  RTC_DateTypeDef sDate = {0};
-  HAL_StatusTypeDef hal_stat = HAL_ERROR;
-  FRESULT f_ret = FR_INVALID_PARAMETER;
-  char szTmp[64] = {0};
-  UINT ulWritten = 0;
+  
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -128,18 +124,19 @@ int main(void)
   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, RxBuffer, RxBuffer_Size);
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
   
-  ZssLog("test");
-  char* strVersion = "V_1.0.7";
+  ZssLog((unsigned char*)"test");
+  char* strVersion = "V_1.0.8";
   SetExtFlag(0);
   SetlogFlag(0);
   SetUnlockFlag(0);
   SetUnlockFlagStep2(0);
   pwm_msc_init(&htim2);
-  pwm_msc_unlock_Step1(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint32_t sysClockFreq = HAL_RCC_GetSysClockFreq();
+  USART_SendFormatString("sysClockFreq: %d\r\n", sysClockFreq);
   zssLogINFO("<%s  %d> %s(Ver: %s)", __FILE__, __LINE__, __FUNCTION__, strVersion);
   USART_SendFormatString("RW_SDCard %s start...\r\n", strVersion);
       
@@ -147,15 +144,12 @@ int main(void)
   USART_SendFormatString("\
                           extract(list log file),\r\n \
                           xxx.log(show the log file in screen),\r\n \
-                          unlock(unlock the msc step1),\r\n \
-                          unlock2(unlock the msc step2),\r\n \
-                          delete(delete the log file), \
-                          start(start the motor), \
-                          \r\n");
+                          delete(delete the log file),\r\n \
+                          start(start the motor)\r\n");
   while (1)
   {
 
-    if (GetExtFlag())		//if receive a complete command
+    if (GetExtFlag())		//if receive extract command
 		{
       USART_SendFormatString("GetExtFlag: %d\r\n", GetExtFlag());
       ListFilesAndDirectories("");
@@ -170,26 +164,6 @@ int main(void)
       SendLogContent(strCurfile);
       free(strCurfile);
       SetlogFlag(0);
-    }
-    if (GetUnlockFlag())
-    {
-      USART_SendFormatString("GetUnlockFlag: %d\r\n", GetUnlockFlag());
-      pwm_msc_unlock_Step1(&htim2);
-      // pwm_msc_unlock_Step2(&htim2);
-      // pwm_msc_start(&htim2);
-      SetUnlockFlag(0);
-    }
-    if (GetUnlockFlagStep2())
-    {
-      USART_SendFormatString("GetUnlockFlagStep2: %d\r\n", GetUnlockFlagStep2());
-      pwm_msc_unlock_Step2(&htim2);
-      SetUnlockFlagStep2(0);
-    }
-    if (GetUnlockFlagStep2())
-    {
-      USART_SendFormatString("GetUnlockFlagStep2: %d\r\n", GetUnlockFlagStep2());
-      pwm_msc_unlock_Step2(&htim2);
-      SetUnlockFlagStep2(0);
     }
     if (GetStartFlag())
     {
