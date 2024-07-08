@@ -128,8 +128,12 @@ int main(void)
   char* strVersion = "V_1.0.8";
   SetExtFlag(0);
   SetlogFlag(0);
-  SetUnlockFlag(0);
-  SetUnlockFlagStep2(0);
+  SetStartFlag(0);
+  SetBrakeFlag(0);
+  SetPauseFlag(0);
+  SetIncreaseFlag(0);
+  SetDecreaseFlag(0);
+
   pwm_msc_init(&htim2);
   /* USER CODE END 2 */
 
@@ -145,7 +149,11 @@ int main(void)
                           extract(list log file),\r\n \
                           xxx.log(show the log file in screen),\r\n \
                           delete(delete the log file),\r\n \
-                          start(start the motor)\r\n");
+                          start(start the motor),\r\n \
+                          brake(stop the motor immediately)\r\n \
+                          pause(stop the motor gradually),\r\n \
+                          acc(accelarate rotate speed of the motor),\r\n \
+                          dec(decrease the speed of the motor\r\n");
   while (1)
   {
 
@@ -170,6 +178,30 @@ int main(void)
       USART_SendFormatString("GetStartFlag: %d\r\n", GetStartFlag());
       pwm_msc_start(&htim2);
       SetStartFlag(0);
+    }
+    if (GetBrakeFlag())
+    {
+      USART_SendFormatString("GetBrakeFlag: %d\r\n", GetStartFlag());
+      pwm_msc_brake(&htim2);
+      SetBrakeFlag(0);
+    }
+    if (GetPauseFlag())
+    {
+      USART_SendFormatString("GetPauseFlag: %d\r\n", GetPauseFlag());
+      pwm_msc_pause(&htim2);
+      SetPauseFlag(0);
+    }
+    if (GetIncreaseFlag())
+    {
+      USART_SendFormatString("GetIncreaseFlag: %d\r\n", GetIncreaseFlag());
+      pwm_msc_inc_speed(&htim2);
+      SetIncreaseFlag(0);
+    }
+    if (GetDecreaseFlag())
+    {
+      USART_SendFormatString("GetDecreaseFlag: %d\r\n", GetDecreaseFlag());
+      pwm_msc_dec_speed(&htim2);
+      SetDecreaseFlag(0);
     }
   }
   

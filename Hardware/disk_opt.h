@@ -5,13 +5,16 @@ void SetExtFlag(int flag);
 int GetExtFlag(void);
 void SetlogFlag(int flag);
 int GetlogFlag(void);
-void SetUnlockFlag(int flag);
-int GetUnlockFlag(void);
-void SetUnlockFlagStep2(int flag);
-int GetUnlockFlagStep2(void);
 void SetStartFlag(int flag);
 int GetStartFlag(void);
-
+void SetBrakeFlag(int flag);
+int GetBrakeFlag(void);
+void SetPauseFlag(int flag);
+int GetPauseFlag(void);
+void SetIncreaseFlag(int flag);
+int GetIncreaseFlag(void);
+void SetDecreaseFlag(int flag);
+int GetDecreaseFlag(void);
 
 void ListFilesAndDirectories(const char* startDir);
 void SendLogContent(const char* logPath);

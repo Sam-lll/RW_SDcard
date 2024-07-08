@@ -13,6 +13,10 @@ int getlog_flag;
 int unlock_flag;
 int unlock_flag_step2;
 int start_flag;
+int brake_flag;
+int pause_flag;
+int increase_flag;
+int decrease_flag;
 
 #if _USE_LFN
 	char lfn[64];
@@ -39,28 +43,43 @@ int GetlogFlag(void) {
     return getlog_flag;
 }
 
-void SetUnlockFlag(int flag) {
-    unlock_flag = flag;
-}
-
-int GetUnlockFlag(void) {
-    return unlock_flag;
-}
-
-void SetUnlockFlagStep2(int flag) {
-    unlock_flag_step2 = flag;
-}
-
-int GetUnlockFlagStep2(void) {
-    return unlock_flag_step2;
-}
-
 void SetStartFlag(int flag) {
     start_flag = flag;
 }
 
 int GetStartFlag(void) {
     return start_flag;
+}
+
+void SetBrakeFlag(int flag) {
+    brake_flag = flag;
+}
+
+int GetBrakeFlag(void) {
+    return brake_flag;
+}
+
+void SetPauseFlag(int flag) {
+    pause_flag = flag;
+}
+
+int GetPauseFlag(void) {
+    return pause_flag;
+}
+void SetIncreaseFlag(int flag) {
+    increase_flag = flag;
+}
+
+int GetIncreaseFlag(void) {
+    return increase_flag;
+}
+
+void SetDecreaseFlag(int flag) {
+    decrease_flag = flag;
+}
+
+int GetDecreaseFlag(void) {
+    return decrease_flag;
 }
 
 void ListFilesAndDirectories(const char* startDir) {

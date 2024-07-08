@@ -229,17 +229,23 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
             strCurfile = strdup(RxBuffer);
             SetlogFlag(1);
         }
-        else if(0 == strcmp(RxBuffer, "unlock")){
-            SetUnlockFlag(1);
-        }
-        else if(0 == strcmp(RxBuffer, "unlock2")){
-            SetUnlockFlagStep2(1);
-        }
         else if(0 == strcmp(RxBuffer, "delete")){
             ;
         }
         else if(0 == strcmp(RxBuffer, "start")){
             SetStartFlag(1);
+        }
+        else if(0 == strcmp(RxBuffer, "brake")){
+            SetBrakeFlag(1);
+        }
+        else if(0 == strcmp(RxBuffer, "pause")){
+            SetPauseFlag(1);
+        }
+        else if(0 == strcmp(RxBuffer, "acc")){
+            SetIncreaseFlag(1);
+        }
+        else if(0 == strcmp(RxBuffer, "dec")){
+            SetDecreaseFlag(1);
         }
         else{
             // Transmit the TxBuffer data over uart
